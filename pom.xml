@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.upgrade.reservation.service</groupId>
+	<artifactId>reservation-service-parent</artifactId>
+	<version>0.0.0.0.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Upgrade Reservation Service - Parent</name>
+	<url>https://www.upgrade.com/</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+    	<maven.compiler.target>1.8</maven.compiler.target>
+		<jacoco-maven-plugin.version>0.8.1</jacoco-maven-plugin.version>
+		<springfox-swagger.version>2.8.0</springfox-swagger.version>
+		<springframework.version>2.6.1</springframework.version>
+		<h2database.version>2.0.202</h2database.version>
+		<jodatime.version>2.9.9</jodatime.version>
+	</properties>
+
+	<modules>
+		<!-- All components must be included here -->
+		<module>reservation-service-rest-service</module>
+		<module>reservation-service-integration-test</module>
+		<module>reservation-service-rest-client</module>
+	</modules>
+
+
+	<profiles>
+		<profile>
+			<id>integration-test</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
+
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<reportSets>
+					<reportSet>
+						<reports>
+							<!-- select non-aggregate reports -->
+							<report>report</report>
+						</reports>
+					</reportSet>
+				</reportSets>
+			</plugin>
+		</plugins>
+	</reporting>
+</project>

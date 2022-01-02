@@ -1,0 +1,416 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This Upgrade Rest Service use to reserve date for an island with an underwater volcano.",
+    "version": "1.0",
+    "title": "Reservation Service API",
+    "contact": {
+      "name": "Peter Eng",
+      "url": "https://www.linkedin.com/in/peter-eng-4029305/",
+      "email": "peterhleng@gmail.com"
+    }
+  },
+  "host": "localhost:8080",
+  "basePath": "/",
+  "tags": [
+    {
+      "name": "reservation-controller",
+      "description": "Reservation API used to manage reservation for the volcano island"
+    }
+  ],
+  "paths": {
+    "/reservations": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "summary": "getAvailableDates",
+        "description": "Get a list of available reservation dates for the island.",
+        "operationId": "getAvailableDatesUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/reservedDate"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "404": {
+            "description": "Unable to find the reservation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "405": {
+            "description": "Http Request Method not supported",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "415": {
+            "description": "Invalid request media type, only application/json is allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "summary": "createReservation",
+        "description": "Create a new reservation",
+        "operationId": "createReservationUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "reservationInfo",
+            "description": "Reservation information required for the booking",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservationInfoDto"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ReservationConfirmationDto"
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "404": {
+            "description": "Unable to find the reservation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "405": {
+            "description": "Http Request Method not supported",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "415": {
+            "description": "Invalid request media type, only application/json is allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          }
+        }
+      }
+    },
+    "/reservations/{id}": {
+      "get": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "summary": "getReservationById",
+        "description": "Get a specific reservation by id.",
+        "operationId": "getReservationByIdUsingGET",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Reservation Id from original booking.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ReservationInfoDto"
+            }
+          },
+          "400": {
+            "description": "Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "404": {
+            "description": "Unable to find the reservation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "405": {
+            "description": "Http Request Method not supported",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "415": {
+            "description": "Invalid request media type, only application/json is allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "summary": "updateReservation",
+        "description": "Update reservation",
+        "operationId": "updateReservationUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Reservation Id from original booking.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "reservationInfo",
+            "description": "Reservation information required for the booking",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReservationInfoDto"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "404": {
+            "description": "Unable to find the reservation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "405": {
+            "description": "Http Request Method not supported",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "415": {
+            "description": "Invalid request media type, only application/json is allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "reservation-controller"
+        ],
+        "summary": "cancelReservation",
+        "description": "Cancel reservation",
+        "operationId": "cancelReservationUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Reservation Id from original booking.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "400": {
+            "description": "Invalid input parameters",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "404": {
+            "description": "Unable to find the reservation",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "405": {
+            "description": "Http Request Method not supported",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "415": {
+            "description": "Invalid request media type, only application/json is allowed",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          },
+          "500": {
+            "description": "Internal Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseDto"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponseDto": {
+      "type": "object",
+      "properties": {
+        "httpStatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The HTTP status code associated with the response error",
+          "allowEmptyValue": false
+        },
+        "link": {
+          "type": "string",
+          "description": "URL link to documentation describing this issue",
+          "allowEmptyValue": false
+        },
+        "message": {
+          "type": "string",
+          "description": "Detailed description of the error",
+          "allowEmptyValue": false
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "UTC date/time when the exception occurred",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "ErrorResponseDto",
+      "description": "Error Response"
+    },
+    "ReservationInfoDto": {
+      "type": "object",
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "checkInDate",
+        "checkOutDate"
+      ],
+      "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First Name",
+          "allowEmptyValue": false
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last Name",
+          "allowEmptyValue": false
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email Address",
+          "allowEmptyValue": false
+        },
+        "checkInDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Check-in Date",
+          "allowEmptyValue": false
+        },
+        "checkOutDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Check-out Date",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "ReservationInfoDto",
+      "description": "Reservation Information"
+    },
+    "ReservationConfirmationDto": {
+      "type": "object",
+      "properties": {
+        "reservationId": {
+          "type": "string",
+          "description": "Reservation Id",
+          "allowEmptyValue": false
+        }
+      },
+      "title": "ReservationConfirmationDto",
+      "description": "Confirmation with Id for updating or cancelling reservation"
+    },
+    "reservedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}
